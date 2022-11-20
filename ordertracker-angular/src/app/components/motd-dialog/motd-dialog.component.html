@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Message of the day</h1>
+<div mat-dialog-content>
+  <mat-spinner *ngIf="isUpdating" [diameter]="35"></mat-spinner>
+  <div id="main-content" *ngIf="!isUpdating">
+    <mat-form-field appearance="outline">
+      <mat-label>Message</mat-label>
+      <textarea matInput [rows]="3" placeholder="Welcome! :)" [(ngModel)]="welcomeDto.message"></textarea>
+    </mat-form-field>
+    <input type="file" accept=".JPG,.JPEG,.PNG" class="form-control" #fileUpload [hidden]="true"
+           (change)="handleImageInputChange($event)">
+    <img [src]=loadBase64Image() />
+    <button id="upload" mat-button color="primary" (click)="fileUpload.click()">
+      <mat-icon class="white">add</mat-icon>
+      Upload image
+    </button>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button (click)="onUpdateClick()">Update</button>
+</div>

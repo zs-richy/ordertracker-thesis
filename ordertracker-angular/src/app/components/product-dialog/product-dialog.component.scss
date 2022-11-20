@@ -1,0 +1,26 @@
+.product-inputs {
+  gap: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.product-inputs mat-form-field {
+  width: 150%;
+}
+
+div.image {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  button {
+    margin-left: 1em;
+  }
+
+  img {
+    max-width: 50%;
+  }
+
+}

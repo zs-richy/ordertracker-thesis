@@ -1,0 +1,29 @@
+.content {
+  display: block;
+  margin: auto;
+  alignment: center;
+  align-content: center;
+
+  mat-checkbox {
+    margin-left: 2.5em;
+    padding-top: 1em;
+  }
+
+}
+
+.control {
+  margin-left: 1em;
+  margin-top: 1em;
+  display: flex;
+  gap: 1em;
+}
+
+.orders {
+  padding: 2.5em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  align-content: space-around;
+  gap: 2.5em;
+}

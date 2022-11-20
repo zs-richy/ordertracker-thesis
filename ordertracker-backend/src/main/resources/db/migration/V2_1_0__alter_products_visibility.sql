@@ -1,0 +1,2 @@
+ALTER TABLE products
+    ADD column isVisible BOOLEAN NOT NULL DEFAULT TRUE

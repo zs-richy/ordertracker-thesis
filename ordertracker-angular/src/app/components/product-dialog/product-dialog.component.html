@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>{{data.product.name}}</h1>
+<div mat-dialog-content class="product-inputs">
+  <mat-form-field appearance="standard">
+    <mat-label>Id.</mat-label>
+    <input [disabled]="true" matInput [(ngModel)]="data.product.id">
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Name</mat-label>
+    <input [disabled]="convertTypeVisibility()" matInput [(ngModel)]="data.product.name">
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Price (€)</mat-label>
+    <input [disabled]="convertTypeVisibility()" matInput [(ngModel)]="data.product.price">
+  </mat-form-field>
+</div>
+
+<div class="image">
+  <mat-spinner [hidden]="hideImageSpinner()"></mat-spinner>
+  <img [src]=loadBase64Image() />
+  <input type="file" accept=".JPG,.JPEG,.PNG" class="form-control" #fileUpload [hidden]="true" (change)="handleImageInputChange($event)">
+  <div [hidden]="convertTypeVisibility()">
+    <button mat-mini-fab color="primary" [hidden]="hideImageEditButton()" (click)="fileUpload.click()"><mat-icon class="white">edit</mat-icon></button>
+    <button mat-button color="primary" [hidden]="hideImageUploadButton()" (click)="fileUpload.click()"><mat-icon class="white">add</mat-icon>Upload image</button>
+</div>
+</div>
+
+
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button (click)="onOkClick()">OK</button>
+</div>

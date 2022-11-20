@@ -1,0 +1,20 @@
+.productsContent {
+  width: 100vw;
+}
+
+table, .buttons, mat-paginator {
+  width: 90vw;
+  margin: auto;
+}
+
+mat-paginator {
+  margin-bottom: 5em;
+}
+
+.buttons {
+  gap: 10px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0.5em;
+  margin-top: 5em;
+}

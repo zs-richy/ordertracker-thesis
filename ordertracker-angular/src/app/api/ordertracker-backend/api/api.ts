@@ -1,0 +1,11 @@
+export * from './authController.service';
+import { AuthControllerService } from './authController.service';
+export * from './generalController.service';
+import { GeneralControllerService } from './generalController.service';
+export * from './imageController.service';
+import { ImageControllerService } from './imageController.service';
+export * from './orderController.service';
+import { OrderControllerService } from './orderController.service';
+export * from './productController.service';
+import { ProductControllerService } from './productController.service';
+export const APIS = [AuthControllerService, ImageControllerService, OrderControllerService, ProductControllerService];

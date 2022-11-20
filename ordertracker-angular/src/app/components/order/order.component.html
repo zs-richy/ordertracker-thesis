@@ -1,0 +1,25 @@
+<div #orderDiv>
+  <mat-card class="mat-card">
+    <mat-card-title>Order #{{order.id}}</mat-card-title>
+    <mat-card-content>
+      <mat-selection-list [multiple]="false">
+        <mat-list-option *ngFor="let orderItem of order.orderItems"><p><span>{{orderItem.product?.name}}</span><span><b>({{orderItem.count}})</b></span></p></mat-list-option>
+      </mat-selection-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <h2 class="mat-h2">Price sum: {{order.sumOfItems}}€</h2>
+      <div class="actions">
+        <mat-form-field appearance="standard">
+          <mat-label>Status</mat-label>
+          <mat-select [(ngModel)]="order.status">
+            <mat-option *ngFor="let status of statuses" [value]="status">
+              {{status}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-button *ngIf="!isUpdating" (click)="updateStatus()">Update</button>
+        <mat-spinner *ngIf="isUpdating" [diameter]="35"></mat-spinner>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>

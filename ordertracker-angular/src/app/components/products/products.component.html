@@ -1,0 +1,50 @@
+<div class="buttons">
+  <button mat-mini-fab color="primary" (click)="onAddClick()"><mat-icon class="white">add</mat-icon></button>
+  <button mat-mini-fab color="primary" (click)="onRefreshClick()"><mat-icon class="white">refresh</mat-icon></button>
+</div>
+
+<div class="productsContent" *ngIf="products != null">
+  <table class="productsTable" mat-table [dataSource]="productDataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id.</th>
+      <td mat-cell *matCellDef="let product"> {{product.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let product"> {{product.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price (€)</th>
+      <td mat-cell *matCellDef="let product"> {{product.price}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">Actions</th>
+      <td mat-cell *matCellDef="let product" (click)="$event.stopPropagation()">
+        <button mat-icon-button (click)="editClicked(product)">
+          <mat-icon color="primary">edit</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon color="primary">delete</mat-icon>
+        </button>
+        <button mat-icon-button (click)="changeProductVisibility(product)">
+          <mat-icon *ngIf="!product.isVisible" [color]="productVisibilityColor(product)">visibility_off</mat-icon>
+          <mat-icon *ngIf="product.isVisible" [color]="productVisibilityColor(product)">visibility</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let product; columns: displayedColumns;" (click)="productClick(product)"></tr>
+  </table>
+  <mat-paginator [length]="10"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 15, 20]"
+                 aria-label="Select page"
+                 class="mat-elevation-z8">
+  </mat-paginator>
+
+</div>

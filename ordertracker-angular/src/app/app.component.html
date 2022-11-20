@@ -1,0 +1,14 @@
+<head>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+
+<mat-toolbar color="primary">
+  <button mat-button (click)="onTitleClick()"><h2>Ordertracker-ADMIN</h2></button>
+  <div [hidden]="!sessionService.isAdmin()">
+    <button mat-button (click)="onProductsClick()">Products</button>
+    <button mat-button (click)="onOrdersClick()">Orders</button>
+  </div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

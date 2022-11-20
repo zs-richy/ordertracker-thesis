@@ -1,0 +1,548 @@
+{
+  "basePath": "/",
+  "definitions": {
+    "FindImageDto": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "tipus": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "FindProductByIdDto": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "withBinary": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "Image": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type": {
+          "enum": [
+            "GENERAL",
+            "THUMBNAIL"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ImageDto": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "imageData": {
+          "items": {
+            "format": "byte",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "productId": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ImageWithBinary": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "imageData": {
+          "items": {
+            "format": "byte",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "type": {
+          "enum": [
+            "GENERAL",
+            "THUMBNAIL"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "LoginRequest": {
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NewOrderDto": {
+      "properties": {
+        "orderItems": {
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "Order": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "orderItems": {
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "status": {
+          "enum": [
+            "CREATED",
+            "WORKING",
+            "PREPARING",
+            "DELIVERING",
+            "COMPLETED"
+          ],
+          "type": "string"
+        },
+        "userId": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "OrderDto": {
+      "properties": {
+        "orders": {
+          "items": {
+            "$ref": "#/definitions/Order"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "OrderItem": {
+      "properties": {
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "product": {
+          "$ref": "#/definitions/Product"
+        }
+      },
+      "type": "object"
+    },
+    "Product": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "images": {
+          "items": {
+            "$ref": "#/definitions/Image"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ProductsDto": {
+      "properties": {
+        "productList": {
+          "items": {
+            "$ref": "#/definitions/Product"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "SignupRequest": {
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "host": "127.0.0.1:8080",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "paths": {
+    "/add-image": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "addImage",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageDto"
+            }
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "tags": [
+          "image-controller"
+        ]
+      }
+    },
+    "/api/add-product": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "addProduct",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        },
+        "tags": [
+          "product-controller"
+        ]
+      }
+    },
+    "/api/find-product-by-id": {
+      "get": {
+        "operationId": "findProductById",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "findProductByIdDto",
+            "required": true,
+            "type": "object"
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        },
+        "tags": [
+          "product-controller"
+        ]
+      }
+    },
+    "/api/get-products": {
+      "get": {
+        "operationId": "getProducts",
+        "parameters": [],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductsDto"
+            }
+          }
+        },
+        "tags": [
+          "product-controller"
+        ]
+      }
+    },
+    "/api/order/new-order": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "newOrder",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewOrderDto"
+            }
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "tags": [
+          "order-controller"
+        ]
+      }
+    },
+    "/api/order/orders": {
+      "get": {
+        "operationId": "getOrders",
+        "parameters": [],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OrderDto"
+            }
+          }
+        },
+        "tags": [
+          "order-controller"
+        ]
+      }
+    },
+    "/api/save-product": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "saveProduct",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        },
+        "tags": [
+          "product-controller"
+        ]
+      }
+    },
+    "/auth/authenticate": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "authenticateUser",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "tags": [
+          "auth-controller"
+        ]
+      }
+    },
+    "/auth/signup": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "registerUser",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignupRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "tags": [
+          "auth-controller"
+        ]
+      }
+    },
+    "/find-image-by-id": {
+      "get": {
+        "operationId": "findImageById",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "dto",
+            "required": true,
+            "type": "object"
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageWithBinary"
+            }
+          }
+        },
+        "tags": [
+          "image-controller"
+        ]
+      }
+    },
+    "/find-image-by-product-id": {
+      "get": {
+        "operationId": "findImageByProductId",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "findImageDto",
+            "required": true,
+            "type": "object"
+          }
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Image"
+              },
+              "type": "array",
+              "uniqueItems": true
+            }
+          }
+        },
+        "tags": [
+          "image-controller"
+        ]
+      }
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "x-components": {}
+}

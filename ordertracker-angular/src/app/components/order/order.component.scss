@@ -1,0 +1,28 @@
+mat-card {
+  max-width: 350px;
+  min-width: 350px;
+}
+
+mat-list-option p {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+span {
+  display: inline;
+}
+
+mat-card-actions {
+  h2 {
+    text-align: end;
+  }
+
+}
+
+div.actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}

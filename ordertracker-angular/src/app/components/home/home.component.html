@@ -1,0 +1,22 @@
+<div class="cards">
+  <mat-card (click)="moveToPage('products')">
+    <mat-card-content>
+      <mat-icon color="primary">list</mat-icon>
+      <h2>Products</h2>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card (click)="moveToPage('orders')">
+    <mat-card-content>
+      <mat-icon color="primary">playlist_add_check</mat-icon>
+      <h2>Orders</h2>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card (click)="openMotdDialog()">
+    <mat-card-content>
+      <mat-icon color="primary">announcement</mat-icon>
+      <h2>Message of the day</h2>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,41 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+mat-icon {
+  transform: scale(5);
+}
+
+div.cards {
+  display: flex;
+  margin: auto;
+  width: 75vw;
+  justify-content: space-around;
+  align-items: center;
+  height: 90%;
+}
+
+mat-card {
+
+  @include mat.elevation(3);
+
+  width: 250px;
+  height: 400px;
+
+  border-radius: 1em;
+
+  background: rgba(245, 245, 245, 0.71);
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    gap: 50px;
+  }
+}
+
+mat-card:hover {
+    @include mat.elevation(10)
+
+}
